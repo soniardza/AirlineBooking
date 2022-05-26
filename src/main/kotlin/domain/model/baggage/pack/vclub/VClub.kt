@@ -12,7 +12,7 @@ open class VClub(
 ) : BaggagePackage() {
 
     init {
-        price = (price * BigDecimal(DISCOUNT)) / BigDecimal(100)
+        price -= ((price * BigDecimal(DISCOUNT)) / BigDecimal(100))
     }
 
     override val baggageTypes: List<BaggageType>
