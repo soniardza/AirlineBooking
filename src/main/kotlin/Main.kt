@@ -1,10 +1,10 @@
 import domain.model.baggage.pack.BaggagePackage
 import domain.model.baggage.pack.regular.Regular
-import domain.model.baggage.pack.regular.Basic as RegularBasic
-import domain.model.baggage.pack.regular.Classic as RegularClassic
-import domain.model.baggage.pack.vclub.Basic
-import domain.model.baggage.pack.vclub.Classic
-import domain.model.baggage.pack.vclub.Plus
+import domain.model.baggage.pack.regular.RegularBasic
+import domain.model.baggage.pack.regular.RegularClassic
+import domain.model.baggage.pack.vclub.ClubBasic
+import domain.model.baggage.pack.vclub.ClubClassic
+import domain.model.baggage.pack.vclub.ClubPlus
 import domain.model.baggage.pack.vclub.VClub
 import java.math.BigDecimal
 
@@ -12,8 +12,8 @@ fun main() {
     val basicPrice = BigDecimal(200)
     val classicPrice = BigDecimal(400)
 
-    val basicClub: VClub = Basic(basicPrice)
-    val classicClub: VClub = Classic(classicPrice)
+    val basicClub: VClub = ClubBasic(basicPrice)
+    val classicClub: VClub = ClubClassic(classicPrice)
 
     println(basicClub.name)
     println(basicClub.price)
@@ -30,6 +30,6 @@ fun main() {
     println(classic.name)
     println(classic.price)
 
-    val plus: BaggagePackage = Plus(BigDecimal(500))
+    val plus: BaggagePackage = ClubPlus(BigDecimal(500))
     println(plus.price)
 }
