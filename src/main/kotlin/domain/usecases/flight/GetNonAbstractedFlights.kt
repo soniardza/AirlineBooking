@@ -1,4 +1,4 @@
-package domain.usecases
+package domain.usecases.flight
 
 import domain.model.AirCraft
 import domain.model.Airport

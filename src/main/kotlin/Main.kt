@@ -1,5 +1,5 @@
 import domain.model.*
-import domain.usecases.GetFlights
+import domain.usecases.flight.GetFlights
 import domain.utils.Formatter
 import presentation.PresentationFormat
 import presentation.flight.FlightPresentationFactory
