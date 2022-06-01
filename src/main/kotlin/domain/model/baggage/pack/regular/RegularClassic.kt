@@ -9,4 +9,5 @@ class RegularClassic(
 
     override val name: String = "Classic"
     override val boardingTurn: BoardingTurn = BoardingTurn.SECOND
+    override val price: BigDecimal = price + BigDecimal(10)
 }

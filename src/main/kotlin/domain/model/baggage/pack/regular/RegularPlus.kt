@@ -9,4 +9,5 @@ class RegularPlus(
 
     override val name: String = "Plus"
     override val boardingTurn: BoardingTurn = BoardingTurn.FIRST
+    override val price: BigDecimal = price + BigDecimal(20)
 }
