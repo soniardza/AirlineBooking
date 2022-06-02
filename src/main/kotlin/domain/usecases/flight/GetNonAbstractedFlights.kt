@@ -11,6 +11,7 @@ import java.time.Month
 import java.time.format.DateTimeFormatter
 
 // No tenemos interfaz padre en común, tenemos que validar caso por caso
+/*
 class GetNonAbstractedFlights(
     private val format: PresentationFormat
 ) {
@@ -83,4 +84,4 @@ class GetNonAbstractedFlights(
             )
         )
     }
-}
+}*/
