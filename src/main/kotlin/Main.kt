@@ -3,30 +3,31 @@ import data.airport.AirportLocalSource
 import data.airportbook.AirportBookingLocalSource
 import data.flight.FlightLocalSource
 import data.ticket.TicketListSingleton
+import domain.usecases.flight.GetFlightSaved
 import domain.usecases.flight.GetFlights
+import domain.usecases.flight.di.FlightDataDI
 import domain.usecases.ticket.AssignFlightToTicket
+import domain.usecases.ticket.di.TicketDataDI
 import presentation.flight.formats.FlightConsoleFormat
 import java.time.Month
 
 fun main() {
-    val airportDataSource = AirportLocalSource()
-    val airportBookingLocalSource = AirportBookingLocalSource(airportDataSource)
-    val airCraftLocalSource = AirCraftLocalSource()
+    val ticketData = TicketDataDI().providesTicketsData()
 
     // Empezar aquí y luego ir para atrás
-    val flightLocal = FlightLocalSource(airCraftLocalSource, airportBookingLocalSource)
-    val getFlights = GetFlights(flightLocal).invoke(Month.JANUARY)
+    val getFlights = GetFlights(
+        FlightDataDI().providesFlightsData()
+    ).invoke(Month.JANUARY)
     getFlights.forEach { (index, flight) ->
         print("$index. ")
         println(FlightConsoleFormat().format(flight))
     }
 
     println("*** Flight Selected ***")
-    val ticketListSingleton = TicketListSingleton()
     val flight = getFlights[1]
-    AssignFlightToTicket(ticketListSingleton).invoke(flight)
+    AssignFlightToTicket(ticketData).invoke(flight)
 
-    val flightSelected = ticketListSingleton.tickets.first().flight
+    val flightSelected = GetFlightSaved(ticketData).invoke()
     println(
         FlightConsoleFormat().format(flightSelected)
     )
