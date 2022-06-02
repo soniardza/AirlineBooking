@@ -1,14 +1,23 @@
-import domain.model.*
+import data.aircraft.AirCraftLocalSource
+import data.airport.AirportLocalSource
+import data.airportbook.AirportBookingLocalSource
+import data.flight.FlightLocalSource
 import domain.usecases.flight.GetFlights
-import domain.utils.Formatter
-import presentation.PresentationFormat
-import presentation.flight.FlightPresentationFactory
+import presentation.flight.formats.FlightConsoleFormat
+import java.time.Month
 
 fun main() {
-    val format = PresentationFormat.CONSOLE
-    val flightFormat: Formatter<Flight> = FlightPresentationFactory().getPresentationFormat(format)
-    val flights = GetFlights(flightFormat).invoke()
-    println(flights)
+    val airportDataSource = AirportLocalSource()
+    val airportBookingLocalSource = AirportBookingLocalSource(airportDataSource)
+    val airCraftLocalSource = AirCraftLocalSource()
+
+    // Empezar aquí y luego ir para atrás
+    val flightLocal = FlightLocalSource(airCraftLocalSource, airportBookingLocalSource)
+    val getFlights = GetFlights(flightLocal).invoke(Month.JANUARY)
+    getFlights.forEach { (index, flight) ->
+        print("$index. ")
+        println(FlightConsoleFormat().format(flight))
+    }
 
 
 }
