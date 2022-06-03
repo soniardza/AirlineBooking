@@ -1,6 +1,6 @@
 package presentation.menu
 
-import domain.utils.Formatter
+import presentation.utils.Formatter
 import presentation.extfunction.isMenuOptionValid
 interface UIMenu<T> {
 

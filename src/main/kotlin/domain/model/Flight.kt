@@ -1,6 +1,6 @@
 package domain.model
 
-import domain.utils.Formatter
+import presentation.utils.Formatter
 import java.math.BigDecimal
 import java.time.Duration
 

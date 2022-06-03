@@ -1,9 +1,9 @@
 package presentation.seat.section.format
 
 import domain.model.seat.SeatSection
-import domain.utils.Formatter
+import presentation.utils.Formatter
 
-class SeatSectionConsoleFormat : Formatter<SeatSection>{
+class SeatSectionConsoleFormat : Formatter<SeatSection> {
     override fun format(seatSection: SeatSection): String {
         return """
             Seat Class: ${seatSection.seatClass.name}

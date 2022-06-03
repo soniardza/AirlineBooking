@@ -5,7 +5,7 @@ import domain.model.AirCraft
 import domain.model.Airport
 import domain.model.AirportBooking
 import domain.model.Flight
-import domain.utils.Formatter
+import presentation.utils.Formatter
 import java.math.BigDecimal
 import java.time.LocalDateTime
 import java.time.Month

@@ -1,7 +1,7 @@
 package presentation.seat.section
 
 import domain.model.seat.SeatSection
-import domain.utils.Formatter
+import presentation.utils.Formatter
 import presentation.PresentationFactory
 import presentation.PresentationFormat
 import presentation.seat.section.format.SeatSectionConsoleFormat

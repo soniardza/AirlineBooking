@@ -2,7 +2,7 @@ package domain.model
 
 import domain.model.baggage.pack.BaggagePackage
 import domain.model.seat.Seat
-import domain.utils.Formatter
+import presentation.utils.Formatter
 import java.math.BigDecimal
 
 class Ticket {

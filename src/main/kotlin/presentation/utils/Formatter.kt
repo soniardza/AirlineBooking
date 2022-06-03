@@ -1,4 +1,4 @@
-package domain.utils
+package presentation.utils
 
 interface Formatter<T> {
     fun format(t: T) : String

@@ -1,7 +1,7 @@
 package presentation.flight.formats
 
 import domain.model.Flight
-import domain.utils.Formatter
+import presentation.utils.Formatter
 import java.time.format.DateTimeFormatter
 
 class FlightConsoleFormat : Formatter<Flight> {
@@ -10,13 +10,13 @@ class FlightConsoleFormat : Formatter<Flight> {
         val departure = flight.departureArrivalBooking.first
         val arrival = flight.departureArrivalBooking.second
         return """
-            ${flight.number}
-            Origin: ${departure.airport.name}
-            Origin DateTime: ${departure.dateTime.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME)}
-            Arrival: ${arrival.airport.name}
-            Arrival DateTime: ${arrival.dateTime.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME)}
-            Duration: ${flight.duration}
-            Price: $${flight.price}
+${flight.number}
+Origin: ${departure.airport.name}
+Origin DateTime: ${departure.dateTime.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME)}
+Arrival: ${arrival.airport.name}
+Arrival DateTime: ${arrival.dateTime.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME)}
+Duration: ${flight.duration}
+Price: $${flight.price}
             
         """.trimIndent()
     }
