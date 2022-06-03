@@ -1,45 +1,31 @@
-import data.aircraft.AirCraftLocalSource
-import data.airport.AirportLocalSource
-import data.airportbook.AirportBookingLocalSource
-import data.flight.FlightLocalSource
-import data.ticket.TicketListSingleton
+import domain.model.Flight
 import domain.usecases.flight.GetFlightSaved
 import domain.usecases.flight.GetFlights
 import domain.usecases.flight.di.FlightDataDI
 import domain.usecases.ticket.AssignFlightToTicket
 import domain.usecases.ticket.di.TicketDataDI
-import presentation.extfunction.isMenuOptionValid
+import presentation.PresentationFormat
+import presentation.flight.FlightPresentationFactory
 import presentation.flight.formats.FlightConsoleFormat
+import presentation.menu.UIMenu
 import java.time.Month
 
 fun main() {
+    val format = PresentationFormat.CONSOLE
+    val flightPresentation = FlightPresentationFactory().getPresentationFormat(format)
     val ticketData = TicketDataDI().providesTicketsData()
+    val flightData = FlightDataDI().providesFlightsData()
 
-    // Empezar aquí y luego ir para atrás
-    val getFlights = GetFlights(
-        FlightDataDI().providesFlightsData()
-    ).invoke(Month.JANUARY)
+    val uiMenuFlight = object : UIMenu<Flight> { }
+    val flightMap = GetFlights(flightData).invoke(Month.JANUARY)
+    val flightSelected = uiMenuFlight.showMenu(flightMap, flightPresentation)
 
-    var flightOption = ""
-    do {
-        // mostrar la lista de flights
-        getFlights.forEach { (index, flight) ->
-            print("$index. ")
-            println(FlightConsoleFormat().format(flight))
-        }
-        println("*** Select Number Option ***")
-        flightOption = readLine().orEmpty()
 
-    } while (!flightOption.isMenuOptionValid(getFlights))
-    println("Option selected: $flightOption")
+    AssignFlightToTicket(ticketData).invoke(flightSelected)
 
-    println("*** Flight Selected ***")
-    val flight = getFlights[flightOption.toInt()]
-    AssignFlightToTicket(ticketData).invoke(flight)
-
-    val flightSelected = GetFlightSaved(ticketData).invoke()
+    val flightSaved = GetFlightSaved(ticketData).invoke()
     println(
-        FlightConsoleFormat().format(flightSelected)
+        FlightConsoleFormat().format(flightSaved)
     )
 
 
