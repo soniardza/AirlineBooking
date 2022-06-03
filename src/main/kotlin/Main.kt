@@ -18,13 +18,25 @@ fun main() {
     val getFlights = GetFlights(
         FlightDataDI().providesFlightsData()
     ).invoke(Month.JANUARY)
-    getFlights.forEach { (index, flight) ->
-        print("$index. ")
-        println(FlightConsoleFormat().format(flight))
-    }
+
+    var flightOption = ""
+    do {
+        // mostrar la lista de flights
+        getFlights.forEach { (index, flight) ->
+            print("$index. ")
+            println(FlightConsoleFormat().format(flight))
+        }
+        println("*** Select Number Option ***")
+        flightOption = readLine().orEmpty()
+
+        val isNumber = flightOption.all { it.isDigit() }
+        val isValidOption = isNumber && getFlights.containsKey(flightOption.toInt())
+
+    } while (flightOption.isBlank() || flightOption.isEmpty() || !isValidOption)
+    println("Option selected: $flightOption")
 
     println("*** Flight Selected ***")
-    val flight = getFlights[1]
+    val flight = getFlights[flightOption.toInt()]
     AssignFlightToTicket(ticketData).invoke(flight)
 
     val flightSelected = GetFlightSaved(ticketData).invoke()
