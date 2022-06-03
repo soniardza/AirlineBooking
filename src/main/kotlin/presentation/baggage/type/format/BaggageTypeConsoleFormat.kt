@@ -1,10 +1,10 @@
-package presentation.baggage.type
+package presentation.baggage.type.format
 
 import domain.model.baggage.type.BaggageType
 import domain.utils.Formatter
 
 
-class BaggageTypeConsole : Formatter<BaggageType> {
+class BaggageTypeConsoleFormat : Formatter<BaggageType> {
     override fun format(baggageType: BaggageType): String =
         """
             ${baggageType.emoji} ${baggageType.quantity} ${baggageType.title}
