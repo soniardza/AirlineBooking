@@ -8,6 +8,7 @@ import domain.usecases.flight.GetFlights
 import domain.usecases.flight.di.FlightDataDI
 import domain.usecases.ticket.AssignFlightToTicket
 import domain.usecases.ticket.di.TicketDataDI
+import presentation.extfunction.isMenuOptionValid
 import presentation.flight.formats.FlightConsoleFormat
 import java.time.Month
 
@@ -29,10 +30,7 @@ fun main() {
         println("*** Select Number Option ***")
         flightOption = readLine().orEmpty()
 
-        val isNumber = flightOption.all { it.isDigit() }
-        val isValidOption = isNumber && getFlights.containsKey(flightOption.toInt())
-
-    } while (flightOption.isBlank() || flightOption.isEmpty() || !isValidOption)
+    } while (!flightOption.isMenuOptionValid(getFlights))
     println("Option selected: $flightOption")
 
     println("*** Flight Selected ***")
